@@ -2,6 +2,6 @@ package ontologia.predicados;
 
 import onotologia.Predicado;
 
-public class Tiene_jugador implements Predicado {
+public class Cartas_descartadas implements Predicado {
     
 }
