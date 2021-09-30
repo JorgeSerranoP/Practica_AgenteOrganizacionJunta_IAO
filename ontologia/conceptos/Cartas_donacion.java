@@ -2,12 +2,13 @@ package ontologia.conceptos;
 
 import ontologia.Concepto;
 
-public class Cartas_influencia implements Concepto {
+public class Cartas_donacion implements Concepto {
 	
 	private Cartas_politicas carta;
 	private Jugador jugador;
+	private Billetes dinero;
 	
-	public Cartas_influencia()
+	public Cartas_donacion()
 	{ ; }
 	
 	public Cartas_politicas getCarta() {
@@ -26,4 +27,13 @@ public class Cartas_influencia implements Concepto {
 		this.jugador = jugador;
 	}
 
+	public Billetes getDinero() {
+		return dinero;
+	}
+
+	public void setDinero(Billetes dinero) {
+		this.dinero = dinero;
+	}
+	
+	
 }
