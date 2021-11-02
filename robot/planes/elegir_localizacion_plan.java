@@ -34,6 +34,11 @@ public class Elegir_localizacion_plan extends Plan
 		msg.setContent(el);
 		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
 		sendMessage(msg);
+
+		IMessageEvent	msg	= createMessageEvent("informelige_localizacion");
+		msg.setContent(el);
+		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+		sendMessage(msg);
 		System.out.println("localizaciones asigna una localizacion");
 	}
 }
