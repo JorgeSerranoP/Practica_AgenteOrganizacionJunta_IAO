@@ -6,7 +6,7 @@ import ontologia.conceptos.*;
 public class Vuelve_exilio implements Accion {
 	
 	private Jugador jugador;
-	private Exilio exilio;
+	private Localizacion exilio;
 	private Localizacion localizacion;
 	
     public Vuelve_exilio()
@@ -20,11 +20,11 @@ public class Vuelve_exilio implements Accion {
 		this.jugador = jugador;
 	}
 
-	public Exilio getExilio() {
+	public Localizacion getExilio() {
 		return exilio;
 	}
 
-	public void setExilio(Exilio exilio) {
+	public void setExilio(Localizacion exilio) {
 		this.exilio = exilio;
 	}
 

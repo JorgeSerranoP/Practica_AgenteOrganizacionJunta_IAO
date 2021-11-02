@@ -6,7 +6,7 @@ import ontologia.conceptos.*;
 public class Se_exilia implements Accion {
 	
 	private Jugador jugador;
-	private Exilio exilio;
+	private Localizacion exilio;
 	
     public Se_exilia()
     { ; }
@@ -19,11 +19,11 @@ public class Se_exilia implements Accion {
 		this.jugador = jugador;
 	}
 
-	public Exilio getExilio() {
+	public Localizacion getExilio() {
 		return exilio;
 	}
 
-	public void setExilio(Exilio exilio) {
+	public void setExilio(Localizacion exilio) {
 		this.exilio = exilio;
 	}
 	

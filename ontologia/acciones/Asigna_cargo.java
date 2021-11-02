@@ -1,13 +1,12 @@
 package ontologia.acciones;
 
 import ontologia.Accion;
+import ontologia.conceptos.Cargo;
 import ontologia.conceptos.Jugador;
-import ontologia.conceptos.Presidente;
 
 public class Asigna_cargo implements Accion {
 	private Jugador jugador;
-	private Presidente presidente;
-	//private Cargo cargo;
+	private Cargo cargo;
 	
     public Asigna_cargo()
     { ; }
@@ -20,13 +19,12 @@ public class Asigna_cargo implements Accion {
 		this.jugador = jugador;
 	}
 
-	public Presidente getPresidente() {
-		return presidente;
+	public Cargo getCargo() {
+		return cargo;
 	}
 
-	public void setPresidente(Presidente presidente) {
-		this.presidente = presidente;
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
 	}
-    
-    
+	
 }

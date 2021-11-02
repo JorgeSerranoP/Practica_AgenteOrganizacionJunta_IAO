@@ -5,17 +5,17 @@ import ontologia.conceptos.*;
 
 public class Presupuesto_propuesto implements Predicado {
     
-	private Presidente presidente;
+	private Cargo presidente;
 	private Presupuesto presupuesto;
 	
     public Presupuesto_propuesto()
     { ; }
 
-	public Presidente getPresidente() {
+	public Cargo getPresidente() {
 		return presidente;
 	}
 
-	public void setPresidente(Presidente presidente) {
+	public void setPresidente(Cargo presidente) {
 		this.presidente = presidente;
 	}
 

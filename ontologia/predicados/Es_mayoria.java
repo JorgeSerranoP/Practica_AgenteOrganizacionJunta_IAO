@@ -1,13 +1,13 @@
 package ontologia.predicados;
 
 import ontologia.Predicado;
-import ontologia.conceptos.Presidente;
+import ontologia.conceptos.Jugador;
 import ontologia.conceptos.Presupuesto;
 
 public class Es_mayoria implements Predicado {
     
 	private int votos;
-	private Candidato candidato;
+	private Jugador candidato;
 	
 	public Es_mayoria()
 	{ ; }
@@ -20,11 +20,11 @@ public class Es_mayoria implements Predicado {
 		this.votos = votos;
 	}
 
-	public Candidato getCandidato() {
+	public Jugador getCandidato() {
 		return candidato;
 	}
 
-	public void setCandidato(Candidato candidato) {
+	public void setCandidato(Jugador candidato) {
 		this.candidato = candidato;
 	}
 	

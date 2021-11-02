@@ -6,7 +6,7 @@ import ontologia.conceptos.*;
 public class Propone_candidatos implements Accion {
 	
 	private Jugador jugador;
-	private Candidato candidato;
+	private Jugador candidato;
 	
     public Propone_candidatos()
     { ; }
@@ -19,11 +19,11 @@ public class Propone_candidatos implements Accion {
 		this.jugador = jugador;
 	}
 
-	public Candidato getCandidato() {
+	public Jugador getCandidato() {
 		return candidato;
 	}
 
-	public void setCandidato(Candidato candidato) {
+	public void setCandidato(Jugador candidato) {
 		this.candidato = candidato;
 	}
     

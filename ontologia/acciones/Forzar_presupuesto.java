@@ -5,17 +5,18 @@ import ontologia.conceptos.*;
 
 public class Forzar_presupuesto implements Accion {
 	
-	private Ministro_interior ministro;
+	private Cargo ministro;
 	private Presupuesto presupuesto;
 	
     public Forzar_presupuesto()
     { ; }
 
-	public Ministro_interior getMinistro() {
+	
+	public Cargo getMinistro() {
 		return ministro;
 	}
 
-	public void setMinistro(Ministro_interior ministro) {
+	public void setMinistro(Cargo ministro) {
 		this.ministro = ministro;
 	}
 

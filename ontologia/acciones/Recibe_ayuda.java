@@ -5,17 +5,17 @@ import ontologia.conceptos.*;
 
 public class Recibe_ayuda implements Accion {
 	
-	private Presidente presidente;
+	private Cargo presidente;
 	private Billetes billete;
 	
     public Recibe_ayuda()
     { ; }
 
-	public Presidente getPresidente() {
+	public Cargo getPresidente() {
 		return presidente;
 	}
 
-	public void setPresidente(Presidente presidente) {
+	public void setPresidente(Cargo presidente) {
 		this.presidente = presidente;
 	}
 

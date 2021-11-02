@@ -7,7 +7,7 @@ public class Intercambiar_cartas implements Accion {
 	
 	private Jugador jugador1;
 	private Jugador jugador2;
-	private Cartas_políticas cartas;
+	private Cartas_politicas cartas;
 	
     public Intercambiar_cartas()
     { ; }
@@ -28,11 +28,11 @@ public class Intercambiar_cartas implements Accion {
 		this.jugador2 = jugador2;
 	}
 
-	public Cartas_políticas getCartas() {
+	public Cartas_politicas getCartas() {
 		return cartas;
 	}
 
-	public void setCartas(Cartas_políticas cartas) {
+	public void setCartas(Cartas_politicas cartas) {
 		this.cartas = cartas;
 	}
     

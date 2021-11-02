@@ -6,18 +6,18 @@ import ontologia.conceptos.*;
 public class Dinero_repartido implements Predicado {
     
 
-	private Presidente presidente;
+	private Cargo presidente;
 	private Presupuesto presupuesto;
-	private String cargo;
+	private Cargo cargo;
 	
 	public Dinero_repartido()
 	{ ; }
 
-	public Presidente getPresidente() {
+	public Cargo getPresidente() {
 		return presidente;
 	}
 
-	public void setPresidente(Presidente presidente) {
+	public void setPresidente(Cargo presidente) {
 		this.presidente = presidente;
 	}
 
@@ -29,11 +29,11 @@ public class Dinero_repartido implements Predicado {
 		this.presupuesto = presupuesto;
 	}
 
-	public String getCargo() {
+	public Cargo getCargo() {
 		return cargo;
 	}
 
-	public void setCargo(String cargo) {
+	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
 	

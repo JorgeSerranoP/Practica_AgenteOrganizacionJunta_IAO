@@ -27,5 +27,4 @@ public class Pierde_cartas implements Accion {
 		this.cartas = cartas;
 	}
     
-    
 }

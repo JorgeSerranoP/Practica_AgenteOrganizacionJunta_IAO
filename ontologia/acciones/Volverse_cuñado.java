@@ -5,26 +5,26 @@ import ontologia.conceptos.*;
 
 public class Volverse_cuÃ±ado implements Accion {
 	
-	private Presidente presidente;
-	private Cuñado cuñado;
+	private Cargo presidente;
+	private Cargo cunado;
 	
     public Volverse_cuÃ±ado()
     { ; }
 
-	public Presidente getPresidente() {
+	public Cargo getPresidente() {
 		return presidente;
 	}
 
-	public void setPresidente(Presidente presidente) {
+	public void setPresidente(Cargo presidente) {
 		this.presidente = presidente;
 	}
 
-	public Cuñado getCuñado() {
-		return cuñado;
+	public Cargo getCunado() {
+		return cunado;
 	}
 
-	public void setCuñado(Cuñado cuñado) {
-		this.cuñado = cuñado;
+	public void setCunado(Cargo cunado) {
+		this.cunado = cunado;
 	}
     
     

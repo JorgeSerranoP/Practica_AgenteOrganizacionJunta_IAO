@@ -6,7 +6,7 @@ import ontologia.conceptos.*;
 public class Exiliado implements Predicado {
     
 	private Jugador jugador;
-	private Exilio exilio;
+	private Localizacion exilio;
 	
     public Exiliado()
     { ; }
@@ -19,11 +19,15 @@ public class Exiliado implements Predicado {
 		this.jugador = jugador;
 	}
 
-	public Exilio getExilio() {
+	public Localizacion getExilio() {
 		return exilio;
 	}
 
-	public void setExilio(Exilio exilio) {
+	public void setExilio(Localizacion exilio) {
 		this.exilio = exilio;
 	}
+	
+	
+    
+    
 }

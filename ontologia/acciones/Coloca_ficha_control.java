@@ -5,19 +5,26 @@ import ontologia.conceptos.*;
 
 public class Coloca_ficha_control implements Accion {
     
-	private Presidente presidente;
-	//private Cargo cargo;
+	private Cargo cargo;
+	private Ficha_control fichaControl;
 	
 	public Coloca_ficha_control()
     { ; }
 
-	public Presidente getPresidente() {
-		return presidente;
+	public Cargo getCargo() {
+		return cargo;
 	}
 
-	public void setPresidente(Presidente presidente) {
-		this.presidente = presidente;
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
 	}
-	
+
+	public Ficha_control getFichaControl() {
+		return fichaControl;
+	}
+
+	public void setFichaControl(Ficha_control fichaControl) {
+		this.fichaControl = fichaControl;
+	}
 	
 }

@@ -5,7 +5,7 @@ import ontologia.Concepto;
 public class Ayuda_extranjera implements Concepto {
 	
 	private Billetes presupuesto;
-	private Presidente presidente;
+	private Cargo presidente;
 	
 	public Ayuda_extranjera()
 	{ ; }
@@ -18,11 +18,11 @@ public class Ayuda_extranjera implements Concepto {
 		this.presupuesto = presupuesto;
 	}
 
-	public Presidente getPresidente() {
+	public Cargo getPresidente() {
 		return presidente;
 	}
 
-	public void setPresidente(Presidente presidente) {
+	public void setPresidente(Cargo presidente) {
 		this.presidente = presidente;
 	}
 	

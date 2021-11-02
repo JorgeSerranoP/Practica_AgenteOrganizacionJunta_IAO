@@ -7,8 +7,8 @@ import ontologia.conceptos.*;
 public class Cargo_asignado implements Predicado {
     
 	private Jugador jugador;
-	private Presidente presidente;
-	private String cargo;
+	private Cargo presidente;
+	private Cargo cargo;
 	
 	public Cargo_asignado()
 	{ ; }
@@ -21,19 +21,19 @@ public class Cargo_asignado implements Predicado {
 		this.jugador = jugador;
 	}
 
-	public Presidente getPresidente() {
+	public Cargo getPresidente() {
 		return presidente;
 	}
 
-	public void setPresidente(Presidente presidente) {
+	public void setPresidente(Cargo presidente) {
 		this.presidente = presidente;
 	}
 
-	public String getCargo() {
+	public Cargo getCargo() {
 		return cargo;
 	}
 
-	public void setCargo(String cargo) {
+	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
 	

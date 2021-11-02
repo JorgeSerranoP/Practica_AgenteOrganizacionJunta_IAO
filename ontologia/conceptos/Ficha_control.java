@@ -4,25 +4,25 @@ import ontologia.Concepto;
 
 public class Ficha_control implements Concepto {
 	
-	private Cuñado cuñado;
-	private String cargo;
+	private Cargo cuñado;
+	private Cargo cargo;
 	
 	public Ficha_control()
 	{ ; }
 
-	public Cuñado getCuñado() {
+	public Cargo getCuñado() {
 		return cuñado;
 	}
 
-	public void setCuñado(Cuñado cuñado) {
+	public void setCuñado(Cargo cuñado) {
 		this.cuñado = cuñado;
 	}
 
-	public String getCargo() {
+	public Cargo getCargo() {
 		return cargo;
 	}
 
-	public void setCargo(String cargo) {
+	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
 	

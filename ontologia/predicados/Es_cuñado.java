@@ -5,20 +5,20 @@ import ontologia.conceptos.*;
 
 public class Es_cuñado implements Predicado {
     
-	private Presidente presidente;
-	private Cuñado cuñado;
+	private Cargo presidente;
+	private Cargo cuñado;
 	public Es_cuñado()
 	{ ; }
-	public Presidente getPresidente() {
+	public Cargo getPresidente() {
 		return presidente;
 	}
-	public void setPresidente(Presidente presidente) {
+	public void setPresidente(Cargo presidente) {
 		this.presidente = presidente;
 	}
-	public Cuñado getCuñado() {
+	public Cargo getCuñado() {
 		return cuñado;
 	}
-	public void setCuñado(Cuñado cuñado) {
+	public void setCuñado(Cargo cuñado) {
 		this.cuñado = cuñado;
 	}
 	

@@ -5,18 +5,17 @@ import ontologia.conceptos.*;
 
 public class Dimitir_presidente implements Accion {
 	
-	private Presidente presidente;
+	private Cargo presidente;
 	
     public Dimitir_presidente()
     { ; }
 
-	public Presidente getPresidente() {
+	public Cargo getPresidente() {
 		return presidente;
 	}
 
-	public void setPresidente(Presidente presidente) {
+	public void setPresidente(Cargo presidente) {
 		this.presidente = presidente;
 	}
-    
     
 }
