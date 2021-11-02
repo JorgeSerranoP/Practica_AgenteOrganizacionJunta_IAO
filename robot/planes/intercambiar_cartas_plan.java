@@ -12,10 +12,19 @@ import jadex.adapter.fipa.SearchConstraints;
 import jadex.adapter.fipa.ServiceDescription;
 import ontologia.acciones.*;
 
-public class intercambiar_cartas_plan extends Plan
+public class Intercambiar_cartas_plan extends Plan
 {
     public void body()
     {
-
+        // busco a la nevera
+        ServiceDescription sd = new ServiceDescription();
+		sd.setType("fridge");
+		AgentDescription dfadesc = new AgentDescription();
+		dfadesc.addService(sd);
+		IGoal ft = createGoal("df_search");
+		ft.getParameter("description").setValue(dfadesc);
+		dispatchSubgoalAndWait(ft);
+		AgentDescription[]	result	= (AgentDescription[])ft.getParameterSet("result").getValues();
+		AgentIdentifier nevera = result[new Random().nextInt(result.length)].getName();
     }
 }
