@@ -16,43 +16,24 @@ public class Elegir_localizacion_plan extends Plan
 {
     public void body()
     {
-		System.out.println ("jugador recibe peticion de localizacion...");
+		// miro cuantas cervezas tiene ese humano
+		System.out.println ("localizaciones recibe peticion de elegir_localizacion...");
 		IMessageEvent	request	= (IMessageEvent)getInitialEvent();
-		AgentIdentifier localizacion= (AgentIdentifier) request.getParameter("sender").getValue();
-		// miro si el jugador esta exiliado
-		ServiceDescription sd = new ServiceDescription();
-		sd.setType("exiliado");
-		AgentDescription dfadesc = new AgentDescription();
-		dfadesc.addService(sd);
-		IGoal ft = createGoal("df_search");
-		ft.getParameter("description").setValue(dfadesc);
-		dispatchSubgoalAndWait(ft);
-		AgentDescription[]	result	= (AgentDescription[])ft.getParameterSet("result").getValues();
-		int i=result.length;
-        boolean exiliado=false;
-		while ((i>0) && !exiliado)
-		{
-			i--; 
-			AgentIdentifier candidato = result[i].getName();
-			exiliado= candidato.equals(localizacion);
-		}
-		// mando mensaje de aceptación si puede beber 
+		AgentIdentifier jugador = (AgentIdentifier) request.getParameter("sender").getValue();
+		Localizaciones_jugadores[] localizaciones= (Localizaciones_jugadores[]) getBeliefbase().getBeliefSet("localizaciones_jugadores").getFacts();
+			
+		System.out.println ("localizaciones registra la localizacion del jugador...");
+		Localizaciones_jugadores lj= new Localizaciones_jugadores();
+		lj.setJugador(jugador);
+		lj.setLocalizacion("Banco");
+		getBeliefbase().getBeliefSet("localizaciones_jugadores").addFact(lj);
+			
+		// mando mensaje de aceptación si puede elegir esa localizacion 
 		Elige_localizacion el = new Elige_localizacion();
-		IMessageEvent	msg	= createMessageEvent("agreeeligelocal");
-		if (exiliado)
-		{
-			msg = createMessageEvent("refuseeligelocal");
-			System.out.println("jugador deniega peticion localizacion: posible jugador exiliado");
-		}
-		else // A PARTIR DE AQUI DA ASCO
-		{
-			// mando mensaje de rechazo si no puede beber mas por ser conductor
-			getBeliefbase().getBelief("cervezaspedidas").setFact(new Boolean(true));
-			getBeliefbase().getBelief("human").setFact(humano); 
-			System.out.println("robot acepta peticion de cerveza");
-		}
-			msg.setContent(el);
-			msg.getParameterSet(SFipa.RECEIVERS).addValue(humano);
-			sendMessage(msg);
+		IMessageEvent	msg	= createMessageEvent("agreeelige_localizacion");
+		msg.setContent(el);
+		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+		sendMessage(msg);
+		System.out.println("localizaciones asigna una localizacion");
 	}
 }
