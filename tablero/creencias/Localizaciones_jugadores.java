@@ -1,4 +1,4 @@
-package robot.creencias;
+package tablero.creencias;
 
 import jadex.adapter.fipa.AgentIdentifier;
 

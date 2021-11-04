@@ -1,7 +1,7 @@
-package robot.planes;
+package tablero.planes;
 
 import jadex.util.SUtil;
-import robot.creencias.*;
+import tablero.creencias.*;
 import jadex.runtime.IMessageEvent;
 import jadex.runtime.Plan;
 import jadex.runtime.IGoal;
@@ -12,7 +12,7 @@ import jadex.adapter.fipa.SearchConstraints;
 import jadex.adapter.fipa.ServiceDescription;
 import ontologia.acciones.*;
 
-public class Intercambiar_billetes_plan extends Plan
+public class Robar_cartas_plan extends Plan
 {
     public void body()
     {

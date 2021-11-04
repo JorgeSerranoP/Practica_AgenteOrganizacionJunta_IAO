@@ -1,0 +1,67 @@
+<agent xmlns="http://jadex.sourceforge.net/jadex"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jadex.sourceforge.net/jadex 
+	                    http://jadex.sourceforge.net/jadex-0.96.xsd"
+	name="tablero"
+	package="tablero">
+
+	<imports>
+		<import>tablero.beliefs.BeersPerHuman</import>
+		<import>tablero.plans.*</import>
+		<import>jadex.runtime.*</import>
+		<import>jadex.planlib.*</import>
+		<import>jadex.util.*</import>
+		<import>jadex.adapter.fipa.*</import>
+		<import>java.util.logging.*</import>
+		<import>java.util.*</import>
+	</imports>
+	
+	<capabilities>
+		<capability name="dfcap" file="jadex.planlib.DF"/>
+	</capabilities>
+
+	<beliefs>
+		<belief name = "localizaciones" class = "String"/>
+        <belief name = "marcador_turno" class = "String">
+	</beliefs>
+
+	<goals>
+		<performgoal name="moverse_localizacion">
+            <contextcondition>
+                ($beliefbase.marcador_turno==Fase_politica)
+            </contextcondition>
+        </performgoal>
+	</goals>
+		
+	<plans>
+        <plan name="elige_localizacion">
+            <body class="EligeLocalizacionPlan"/>
+            <trigger> <goal ref="moverse_localizacion"/> </trigger>
+        </plan>
+	</plans>
+
+	<events>
+        <messageevent name="request" direction="send" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.REQUEST</value>
+			</parameter>
+            <parameter name="language" class="String" direction="fixed">
+                <value>SFipa.NUGGETS_XML</value>
+            </parameter>
+		</messageevent>
+	</events>
+	
+	<configurations>
+		<configuration name="default">
+		<beliefs>
+			<initialbelief ref="marcador_turno">
+                <fact>Fase_politica</fact>
+            </initialbelief>
+		</beliefs>
+		<goals>
+			
+		</goals>
+		</configuration>
+	</configurations>
+	
+</agent>

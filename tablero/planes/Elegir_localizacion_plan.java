@@ -1,7 +1,7 @@
-package robot.planes;
+package tablero.planes;
 
 import jadex.util.SUtil;
-import robot.creencias.*;
+import tablero.creencias.*;
 import jadex.runtime.IMessageEvent;
 import jadex.runtime.Plan;
 import jadex.runtime.IGoal;
