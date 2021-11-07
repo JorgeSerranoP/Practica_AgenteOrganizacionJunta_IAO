@@ -21,22 +21,71 @@
 	</capabilities>
 
 	<beliefs>
-		<belief name = "localizaciones" class = "String"/>
-        <belief name = "marcador_turno" class = "String">
+		<belief name = "localizaciones_jugador" class = "Localizaciones_jugador"/>
+        <belief name = "marcador_fase" class = "String"/>
+		<belief name = "cartas_politicas_jugador" class = "Cartas_politicas_jugador"/>
+		<belief name = "tieneMasDe6Cartas" class = "TieneMasDe6Cartas"/>
+		<belief name = "exiliado" class = "Exiliado"/>
+		<belief name = "excusa_activada" class = "Boolean"/>
 	</beliefs>
 
 	<goals>
 		<performgoal name="moverse_localizacion">
             <contextcondition>
-                ($beliefbase.marcador_turno==Fase_politica)
+                ($beliefbase.marcador_fase==Fase_Eleccion_Localizaciones)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="robar_cartas">
+            <contextcondition>
+                ($beliefbase.marcador_fase==Fase_Robo_CartasPoliticas)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="descartar_cartas">
+            <contextcondition>
+                ($beliefbase.marcador_fase==Fase_Robo_CartasPoliticas)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="volver_exilio">
+            <contextcondition>
+                ($beliefbase.exiliado==true)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="exiliarse">
+            <contextcondition>
+                ($beliefbase.exiliado==false) &amp;&amp; ($beliefbase.marcador_fase==Fase_Eleccion_Localizaciones)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="empezar_golpe">
+            <contextcondition>
+                (($beliefbase.excusa_activada==true) || ($beliefbase.localizaciones_jugador==true)) &amp;&amp; ($beliefbase.marcador_fase==Fase_Golpe)
             </contextcondition>
         </performgoal>
 	</goals>
 		
 	<plans>
-        <plan name="elige_localizacion">
-            <body class="EligeLocalizacionPlan"/>
+        <plan name="elige_localizacion_plan">
+            <body class="Elegir_localizacion_plan"/>
             <trigger> <goal ref="moverse_localizacion"/> </trigger>
+        </plan>
+		<plan name="robar_cartas_plan">
+            <body class="Robar_cartas_plan"/>
+            <trigger> <goal ref="robar_cartas"/> </trigger>
+        </plan>
+		<plan name="descartar_cartas_plan">
+            <body class="Descartar_cartas_plan"/>
+            <trigger> <goal ref="descartar_cartas"/> </trigger>
+        </plan>
+		<plan name="volver_exilio_plan">
+            <body class="Volver_Exilio_plan"/>
+            <trigger> <goal ref="volver_exilio"/> </trigger>
+        </plan>
+		<plan name="exiliarse_plan">
+            <body class="Exiliarse_plan"/>
+            <trigger> <goal ref="exiliarse"/> </trigger>
+        </plan>
+		<plan name="empezar_golpe_plan">
+            <body class="Empezar_golpe_plan"/>
+            <trigger> <goal ref="empezar_golpe"/> </trigger>
         </plan>
 	</plans>
 
@@ -49,13 +98,68 @@
                 <value>SFipa.NUGGETS_XML</value>
             </parameter>
 		</messageevent>
+		<messageevent name="refuseSend" direction="send" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.REFUSE</value>
+			</parameter>
+            <parameter name="language" class="String" direction="fixed">
+                <value>SFipa.NUGGETS_XML</value>
+            </parameter>
+		</messageevent>
+		<messageevent name="AgreeSend" direction="send" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.AGREE</value>
+			</parameter>
+            <parameter name="language" class="String" direction="fixed">
+                <value>SFipa.NUGGETS_XML</value>
+            </parameter>
+		</messageevent>
+		<messageevent name="informSend" direction="send" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.INFORM</value>
+			</parameter>
+            <parameter name="language" class="String" direction="fixed">
+                <value>SFipa.NUGGETS_XML</value>
+            </parameter>
+		</messageevent>
+		<messageevent name="QueryIfSend" direction="send" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.QUERYIF</value>
+			</parameter>
+            <parameter name="language" class="String" direction="fixed">
+                <value>SFipa.NUGGETS_XML</value>
+            </parameter>
+		</messageevent>
+		<messageevent name="refuseReceive" direction="receive" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.REFUSE</value>
+			</parameter>
+		</messageevent>
+		<messageevent name="QueryIfReceive" direction="receive" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.QUERYIF</value>
+			</parameter>
+		</messageevent>
+		<messageevent name="agreeReceive" direction="receive" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.AGREE</value>
+			</parameter>
+		</messageevent>
+		<messageevent name="informReceive" direction="receive" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.INFORM</value>
+			</parameter>
+		</messageevent>
 	</events>
 	
 	<configurations>
 		<configuration name="default">
 		<beliefs>
-			<initialbelief ref="marcador_turno">
-                <fact>Fase_politica</fact>
+			<initialbelief ref="marcador_fase">
+                <fact>Fase_Robo_CartasPoliticas</fact>
+            </initialbelief>
+			<initialbelief ref="excusa_activada">
+                <fact>false</fact>
             </initialbelief>
 		</beliefs>
 		<goals>
