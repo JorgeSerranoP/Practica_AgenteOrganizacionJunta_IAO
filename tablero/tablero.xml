@@ -26,7 +26,16 @@
 		<belief name = "cartas_politicas_jugador" class = "Cartas_politicas_jugador"/>
 		<belief name = "tieneMasDe6Cartas" class = "TieneMasDe6Cartas"/>
 		<belief name = "exiliado" class = "Exiliado"/>
-		<belief name = "excusa_activada" class = "Boolean"/>
+		<belief name = "excusa_activada" class = "boolean"/>
+		<belief name = "cargo_jugador" class = "Cargo_jugador"/>
+		<belief name = "cartas_asesinato" class = "Cartas_asesinato"/>
+		<belief name = "billetes_jugador" class = "Billetes_jugador"/>
+		<belief name = "billetes_jugador_suiza" class = "Billetes_jugador_suiza"/>
+		<belief name = "hay_presidente" class = "boolean"/>
+		<belief name = "partida_iniciada" class = "boolean"/>
+		<belief name = "turno_jugador" class = "Turno_jugador"/>
+		<belief name = "numero_jugadores" class = "int"/>
+		<belief name = "numero_jugadores_turno_jugado" class = "int"/>
 	</beliefs>
 
 	<goals>
@@ -42,7 +51,7 @@
         </performgoal>
 		<performgoal name="descartar_cartas">
             <contextcondition>
-                ($beliefbase.marcador_fase==Fase_Robo_CartasPoliticas)
+                ($beliefbase.marcador_fase!=Fase_Asesinatos) &amp;&amp; ($beliefbase.marcador_fase!=Fase_Dia_Despues)
             </contextcondition>
         </performgoal>
 		<performgoal name="volver_exilio">
@@ -58,6 +67,52 @@
 		<performgoal name="empezar_golpe">
             <contextcondition>
                 (($beliefbase.excusa_activada==true) || ($beliefbase.localizaciones_jugador==true)) &amp;&amp; ($beliefbase.marcador_fase==Fase_Golpe)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="intentar_asesinar">
+            <contextcondition>
+                ($beliefbase.marcador_fase==Fase_Asesinatos) &amp;&amp; (($beliefbase.cargo_jugador==Ministro) || ($beliefbase.cartas_asesinato &gt; 0))
+            </contextcondition>
+        </performgoal>
+		<performgoal name="descartar_billetes">
+            <contextcondition>
+                ($beliefbase.billetes_jugador &gt; 0)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="dimitir_presidente">
+            <contextcondition>
+                ($beliefbase.cargo_jugador==Presidente)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="votar_presidente">
+            <contextcondition>
+                ($beliefbase.marcador_fase==Fase_Eleccion_Presidente) &amp;&amp; ($beliefbase.hay_presidente==false)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="operacion_bancaria">
+            <contextcondition>
+                ($beliefbase.marcador_fase==Fase_Operaciones_Bancarias) &amp;&amp; ($beliefbase.localizaciones_jugador==Banco) &amp;&amp;
+				(($beliefbase.billetes_jugador &gt; 0) || ($beliefbase.billetes_jugador_suiza &gt; 0))
+            </contextcondition>
+        </performgoal>
+		<performgoal name="iniciar_partida">
+            <contextcondition>
+                ($beliefbase.partida_iniciada==false)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="jugar_carta">
+            <contextcondition>
+                ($beliefbase.cartas_politicas_jugador &gt; 0)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="siguiente_turno_jugador">
+            <contextcondition>
+                ($beliefbase.turnoJugador==true)
+            </contextcondition>
+        </performgoal>
+		<performgoal name="cambiar_fase">
+            <contextcondition>
+                ($beliefbase.numero_jugadores_turno_jugado==$beliefbase.numero_jugadores)
             </contextcondition>
         </performgoal>
 	</goals>
@@ -87,6 +142,42 @@
             <body class="Empezar_golpe_plan"/>
             <trigger> <goal ref="empezar_golpe"/> </trigger>
         </plan>
+		<plan name="intentar_asesinar_plan">
+            <body class="Intentar_asesinar_plan"/>
+            <trigger> <goal ref="intentar_asesinar"/> </trigger>
+        </plan>
+		<plan name="descartar_billetes_plan">
+            <body class="Descartar_billetes_plan"/>
+            <trigger> <goal ref="descartar_billetes"/> </trigger>
+        </plan>
+		<plan name="dimitir_presidente_plan">
+            <body class="Dimitir_presidente_plan"/>
+            <trigger> <goal ref="dimitir_presidente"/> </trigger>
+        </plan>
+		<plan name="votar_presidente_plan">
+            <body class="Votar_presidente_plan"/>
+            <trigger> <goal ref="votar_presidente"/> </trigger>
+        </plan>
+		<plan name="operacion_bancaria_plan">
+            <body class="Operacion_bancaria_plan"/>
+            <trigger> <goal ref="operacion_bancaria"/> </trigger>
+        </plan>
+		<plan name="empezar_partida_plan">
+            <body class="Empezar_partida_plan"/>
+            <trigger> <goal ref="empezar_partida"/> </trigger>
+        </plan>
+		<plan name="jugar_carta_plan">
+            <body class="Jugar_carta_plan"/>
+            <trigger> <goal ref="jugar_carta"/> </trigger>
+        </plan>
+		<plan name="siguiente_turno_plan">
+            <body class="Siguiente_turno_plan"/>
+            <trigger> <goal ref="siguiente_turno_jugador"/> </trigger>
+        </plan>
+		<plan name="cambiar_fase_plan">
+            <body class="Cambiar_fase_plan"/>
+            <trigger> <goal ref="cambiar_fase"/> </trigger>
+        </plan>
 	</plans>
 
 	<events>
@@ -109,6 +200,14 @@
 		<messageevent name="AgreeSend" direction="send" type="fipa">
 			<parameter name="performative" class="String" direction="fixed">
 				<value>SFipa.AGREE</value>
+			</parameter>
+            <parameter name="language" class="String" direction="fixed">
+                <value>SFipa.NUGGETS_XML</value>
+            </parameter>
+		</messageevent>
+		<messageevent name="InformIfSend" direction="send" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.INFORMIF</value>
 			</parameter>
             <parameter name="language" class="String" direction="fixed">
                 <value>SFipa.NUGGETS_XML</value>
@@ -160,6 +259,15 @@
             </initialbelief>
 			<initialbelief ref="excusa_activada">
                 <fact>false</fact>
+            </initialbelief>
+			<initialbelief ref="hay_presidente">
+                <fact>false</fact>
+            </initialbelief>
+			<initialbelief ref="partida_iniciada">
+                <fact>false</fact>
+            </initialbelief>
+			<initialbelief ref="numero_jugadores_turno_jugado">
+                <fact>0</fact>
             </initialbelief>
 		</beliefs>
 		<goals>
