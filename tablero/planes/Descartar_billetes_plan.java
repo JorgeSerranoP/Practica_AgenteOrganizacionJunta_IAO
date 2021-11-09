@@ -11,11 +11,13 @@ import jadex.adapter.fipa.AgentDescription;
 import jadex.adapter.fipa.SearchConstraints;
 import jadex.adapter.fipa.ServiceDescription;
 import ontologia.acciones.*;
+import ontologia.predicados.Cartas_descartadas;
 
-public class Robar_cartas_plan extends Plan
+public class Descartar_billetes_plan extends Plan
 {
+
     public void body()
     {
-
+		
     }
 }
