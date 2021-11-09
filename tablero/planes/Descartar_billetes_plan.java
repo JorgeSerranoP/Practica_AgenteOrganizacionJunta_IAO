@@ -13,7 +13,7 @@ import jadex.adapter.fipa.ServiceDescription;
 import ontologia.acciones.*;
 import ontologia.predicados.Cartas_descartadas;
 
-public class Descartar_cartas_plan extends Plan
+public class Descartar_billetes_plan extends Plan
 {
 
     public void body()
