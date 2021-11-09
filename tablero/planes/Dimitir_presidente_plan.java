@@ -33,6 +33,5 @@ public class Dimitir_presidente_plan extends Plan
 		msg.setContent(dp);
 		msg.getParameterSet(SFipa.RECEIVERS).addValue(presidente);
 		sendMessage(msg);
-		
     }
 }
