@@ -36,83 +36,102 @@
 		<belief name = "turno_jugador" class = "Turno_jugador"/>
 		<belief name = "numero_jugadores" class = "int"/>
 		<belief name = "numero_jugadores_turno_jugado" class = "int"/>
+        <belief name = "num_cargos_asignados" class = "Num_cargos_asignados"/>
+        <belief name = "excusa_activada" class = "boolean"/>
 	</beliefs>
 
 	<goals>
-		<performgoal name="moverse_localizacion">
+		<performgoal name="moverse_localizacion" exclude="never">
             <contextcondition>
                 ($beliefbase.marcador_fase==Fase_Eleccion_Localizaciones)
             </contextcondition>
         </performgoal>
-		<performgoal name="robar_cartas">
+		<performgoal name="robar_cartas" exclude="never">
             <contextcondition>
                 ($beliefbase.marcador_fase==Fase_Robo_CartasPoliticas)
             </contextcondition>
         </performgoal>
-		<performgoal name="descartar_cartas">
+		<performgoal name="descartar_cartas" exclude="never">
             <contextcondition>
                 ($beliefbase.marcador_fase!=Fase_Asesinatos) &amp;&amp; ($beliefbase.marcador_fase!=Fase_Dia_Despues)
             </contextcondition>
         </performgoal>
-		<performgoal name="volver_exilio">
+		<performgoal name="volver_exilio" exclude="never">
             <contextcondition>
                 ($beliefbase.exiliado==true)
             </contextcondition>
         </performgoal>
-		<performgoal name="exiliarse">
+		<performgoal name="exiliarse" exclude="never">
             <contextcondition>
                 ($beliefbase.exiliado==false) &amp;&amp; ($beliefbase.marcador_fase==Fase_Eleccion_Localizaciones)
             </contextcondition>
         </performgoal>
-		<performgoal name="empezar_golpe">
+		<performgoal name="empezar_golpe" exclude="never">
             <contextcondition>
                 (($beliefbase.excusa_activada==true) || ($beliefbase.localizaciones_jugador==true)) &amp;&amp; ($beliefbase.marcador_fase==Fase_Golpe)
+                &amp;&amp; ($beliefbase.cargo_jugador!=Presidente)
             </contextcondition>
         </performgoal>
-		<performgoal name="intentar_asesinar">
+		<performgoal name="intentar_asesinar" exclude="never">
             <contextcondition>
                 ($beliefbase.marcador_fase==Fase_Asesinatos) &amp;&amp; (($beliefbase.cargo_jugador==Ministro) || ($beliefbase.cartas_asesinato &gt; 0))
             </contextcondition>
         </performgoal>
-		<performgoal name="descartar_billetes">
+		<performgoal name="descartar_billetes" exclude="never">
             <contextcondition>
                 ($beliefbase.billetes_jugador &gt; 0)
             </contextcondition>
         </performgoal>
-		<performgoal name="dimitir_presidente">
+		<performgoal name="dimitir_presidente" exclude="never">
             <contextcondition>
                 ($beliefbase.cargo_jugador==Presidente)
             </contextcondition>
         </performgoal>
-		<performgoal name="votar_presidente">
+		<performgoal name="votar_presidente" exclude="never">
             <contextcondition>
                 ($beliefbase.marcador_fase==Fase_Eleccion_Presidente) &amp;&amp; ($beliefbase.hay_presidente==false)
             </contextcondition>
         </performgoal>
-		<performgoal name="operacion_bancaria">
+		<performgoal name="operacion_bancaria" exclude="never">
             <contextcondition>
                 ($beliefbase.marcador_fase==Fase_Operaciones_Bancarias) &amp;&amp; ($beliefbase.localizaciones_jugador==Banco) &amp;&amp;
 				(($beliefbase.billetes_jugador &gt; 0) || ($beliefbase.billetes_jugador_suiza &gt; 0))
             </contextcondition>
         </performgoal>
-		<performgoal name="iniciar_partida">
+		<performgoal name="iniciar_partida" exclude="when_succeeded">
             <contextcondition>
                 ($beliefbase.partida_iniciada==false)
             </contextcondition>
         </performgoal>
-		<performgoal name="jugar_carta">
+		<performgoal name="jugar_carta" exclude="never">
             <contextcondition>
                 ($beliefbase.cartas_politicas_jugador &gt; 0)
             </contextcondition>
         </performgoal>
-		<performgoal name="siguiente_turno_jugador">
+		<performgoal name="siguiente_turno_jugador" exclude="never">
             <contextcondition>
                 ($beliefbase.turnoJugador==true)
             </contextcondition>
         </performgoal>
-		<performgoal name="cambiar_fase">
+		<performgoal name="cambiar_fase" exclude="never">
             <contextcondition>
                 ($beliefbase.numero_jugadores_turno_jugado==$beliefbase.numero_jugadores)
+            </contextcondition>
+        </performgoal>
+        <performgoal name="asignar_cargo" exclude="never">
+            <contextcondition>
+                ($beliefbase.marcador_fase==Fase_Asignacion_Cargos) &amp;&amp; ($beliefbase.cargo_jugador!=Presidente) &amp;&amp; 
+                ($beliefbase.num_cargos_asignados &lt; 2)
+            </contextcondition>
+        </performgoal>
+        <performgoal name="recibe_ayuda" exclude="never"> 
+            <contextcondition>
+                ($beliefbase.marcador_fase==Fase_Ayuda_Extranjera) &amp;&amp; ($beliefbase.cargo_jugador==Presidente)
+            </contextcondition>
+        </performgoal>
+        <performgoal name="fase_presupuesto" exclude="never">
+            <contextcondition>
+                ($beliefbase.marcador_fase==Fase_Presupuesto) &amp;&amp; ($beliefbase.cargo_jugador==Presidente)
             </contextcondition>
         </performgoal>
 	</goals>
@@ -178,10 +197,22 @@
             <body class="Cambiar_fase_plan"/>
             <trigger> <goal ref="cambiar_fase"/> </trigger>
         </plan>
+        <plan name="asignar_cargos_plan">
+            <body class="Asignar_cargos_plan"/>
+            <trigger> <goal ref="asignar_cargo"/> </trigger>
+        </plan>
+        <plan name="recibe_ayuda_plan">
+            <body class="Recibe_ayuda_plan"/>
+            <trigger> <goal ref="recibe_ayuda"/> </trigger>
+        </plan>
+        <plan name="fase_presupuesto_plan">
+            <body class="Fase_presupuesto_plan"/>
+            <trigger> <goal ref="fase_presupuesto"/> </trigger>
+        </plan>
 	</plans>
 
 	<events>
-        <messageevent name="request" direction="send" type="fipa">
+        <messageevent name="requestSend" direction="send" type="fipa">
 			<parameter name="performative" class="String" direction="fixed">
 				<value>SFipa.REQUEST</value>
 			</parameter>
@@ -234,6 +265,11 @@
 				<value>SFipa.REFUSE</value>
 			</parameter>
 		</messageevent>
+        <messageevent name="requestReceive" direction="receive" type="fipa">
+			<parameter name="performative" class="String" direction="fixed">
+				<value>SFipa.REQUEST</value>
+			</parameter>
+		</messageevent>
 		<messageevent name="QueryIfReceive" direction="receive" type="fipa">
 			<parameter name="performative" class="String" direction="fixed">
 				<value>SFipa.QUERYIF</value>
@@ -269,9 +305,17 @@
 			<initialbelief ref="numero_jugadores_turno_jugado">
                 <fact>0</fact>
             </initialbelief>
+            <initialbelief ref="excusa_activada">
+                <fact>false</fact>
+            </initialbelief>
 		</beliefs>
 		<goals>
-			
+			<initialgoal ref="iniciar_partida">
+            </initialgoal>
+            <initialgoal ref="df_register">
+				<parameter ref="description"> <value> 
+					SFipa.createAgentDescription(null,SFipa.createServiceDescription("tablero","jugador", null))</value></parameter>
+			</initialgoal>
 		</goals>
 		</configuration>
 	</configurations>
