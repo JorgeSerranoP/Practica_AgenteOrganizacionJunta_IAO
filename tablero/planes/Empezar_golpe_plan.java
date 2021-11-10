@@ -28,6 +28,9 @@ public class Empezar_golpe_plan extends Plan
 		{
 			msg = createMessageEvent("refuseExcusaActivada");
 			System.out.println("la ficha de excusa no esta activada");
+            msg.setContent(ea);
+		    msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+		    sendMessage(msg);
 		}
         else {
             IMessageEvent	msg	= createMessageEvent("agreeExcusaActivada");
@@ -36,11 +39,9 @@ public class Empezar_golpe_plan extends Plan
             msg.setContent(eg);
             msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
             sendMessage(msg);
+            msg.setContent(ea);
+		    msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+		    sendMessage(msg);
         }
-		msg.setContent(ea);
-		msg.getParameterSet(SFipa.RECEIVERS).addValue(nevera);
-		sendMessage(msg);
-	
 	}
-    }
 }

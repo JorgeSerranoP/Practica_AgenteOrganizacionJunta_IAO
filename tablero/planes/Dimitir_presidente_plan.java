@@ -18,7 +18,7 @@ public class Dimitir_presidente_plan extends Plan
 
     public void body()
     {
-		ServiceDescription sd = new ServiceDescription();
+		ServiceDescription sd = new ServiceDescription(); //PONER PRESIDENTE EN DIAGRAMA
 		sd.setType("presidente");
 		AgentDescription dfadesc = new AgentDescription();
 		dfadesc.addService(sd);
@@ -27,16 +27,16 @@ public class Dimitir_presidente_plan extends Plan
 		AgentDescription[]	result	= (AgentDescription[])ft.getParameterSet("result").getValues();
 		AgentIdentifier presidente = result[0].getName();
 
-		Dimitir_presidente dp= new Dimitir_presidente();
+		Dimitir_presidente dp = new Dimitir_presidente();
 		System.out.println("tablero le dice al presidente si quiere dimitir");
 		IMessageEvent	msg	= createMessageEvent("requestDimitir");
 		msg.setContent(dp);
 		msg.getParameterSet(SFipa.RECEIVERS).addValue(presidente);
 		sendMessage(msg);
 
-		Presidente_dimitido pd= new Presidente_dimitido();
+		Presidente_dimitido pd = new Presidente_dimitido();
 		IMessageEvent	msg	= createMessageEvent("informDimitido");
-		msg.setContent(presidenteDimitido);
+		msg.setContent(pd);
 		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
 		sendMessage(msg);
     }
