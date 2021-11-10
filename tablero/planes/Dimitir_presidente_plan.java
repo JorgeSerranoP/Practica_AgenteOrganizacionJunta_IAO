@@ -33,5 +33,12 @@ public class Dimitir_presidente_plan extends Plan
 		msg.setContent(dp);
 		msg.getParameterSet(SFipa.RECEIVERS).addValue(presidente);
 		sendMessage(msg);
+
+		Presidente_dimitido pd= new Presidente_dimitido();
+		IMessageEvent	msg	= createMessageEvent("informDimitido");
+		msg.setContent(presidenteDimitido);
+		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+		sendMessage(msg);
     }
 }
+//recorrer array de jugadores para mandar el mensaje
