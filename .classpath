@@ -6,19 +6,19 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jars/bcel.jar"/>
-	<classpathentry kind="lib" path="jars/GraphLayout.jar"/>
-	<classpathentry kind="lib" path="jars/jadex_examples.jar"/>
-	<classpathentry kind="lib" path="jars/jadex_rt.jar"/>
-	<classpathentry kind="lib" path="jars/jadex_standalone.jar"/>
-	<classpathentry kind="lib" path="jars/jadex_tools.jar"/>
-	<classpathentry kind="lib" path="jars/janino.jar"/>
-	<classpathentry kind="lib" path="jars/jhall.jar"/>
-	<classpathentry kind="lib" path="jars/jibx-bind.jar"/>
-	<classpathentry kind="lib" path="jars/jibx-extras.jar"/>
-	<classpathentry kind="lib" path="jars/jibx-run.jar"/>
-	<classpathentry kind="lib" path="jars/nuggets.jar"/>
-	<classpathentry kind="lib" path="jars/xmlpull_1_1_4.jar"/>
-	<classpathentry kind="lib" path="jars/xpp3.jar"/>
+	<classpathentry kind="lib" path="src\lib\bcel.jar"/>
+	<classpathentry kind="lib" path="src\lib\GraphLayout.jar"/>
+	<classpathentry kind="lib" path="src\lib\jadex_examples.jar"/>
+	<classpathentry kind="lib" path="src\lib\jadex_rt.jar"/>
+	<classpathentry kind="lib" path="src\lib\jadex_standalone.jar"/>
+	<classpathentry kind="lib" path="src\lib\jadex_tools.jar"/>
+	<classpathentry kind="lib" path="src\lib\janino.jar"/>
+	<classpathentry kind="lib" path="src\lib\jhall.jar"/>
+	<classpathentry kind="lib" path="src\lib\jibx-bind.jar"/>
+	<classpathentry kind="lib" path="src\lib\jibx-extras.jar"/>
+	<classpathentry kind="lib" path="src\lib\jibx-run.jar"/>
+	<classpathentry kind="lib" path="src\lib\nuggets.jar"/>
+	<classpathentry kind="lib" path="src\lib\xmlpull_1_1_4.jar"/>
+	<classpathentry kind="lib" path="src\lib\xpp3.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
