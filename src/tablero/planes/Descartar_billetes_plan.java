@@ -74,6 +74,6 @@ public class Descartar_billetes_plan extends Plan
 			System.out.println("el jugador ha descartado billetes");
 		}
 
-		
+
     }
 }
