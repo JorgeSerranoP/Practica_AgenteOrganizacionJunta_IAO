@@ -18,14 +18,24 @@ public class Descartar_billetes_plan extends Plan
 
     public void body()
     {
-		ServiceDescription sd = new ServiceDescription();
-		sd.setType("tablero");
-		AgentDescription dfadesc = new AgentDescription();
-		dfadesc.addService(sd);
-		IGoal ft = createGoal("df_search");
-		ft.getParameter("description").setValue(dfadesc);
-		AgentDescription[]	result	= (AgentDescription[])ft.getParameterSet("result").getValues();
-		AgentIdentifier tablero = result[0].getName();			
+		ServiceDescription sdTablero = new ServiceDescription();
+		sdTablero.setType("tablero");
+		AgentDescription dfadescTablero = new AgentDescription();
+		dfadescTablero.addService(sdTablero);
+		IGoal ftTablero = createGoal("df_search");
+		ftTablero.getParameter("description").setValue(dfadescTablero);
+		AgentDescription[]	result	= (AgentDescription[])ftTablero.getParameterSet("result").getValues();
+		AgentIdentifier tablero = result[0].getName();
+
+		ServiceDescription sdJugador = new ServiceDescription();
+		sdJugador.setType("jugador");
+		AgentDescription dfadescJugador = new AgentDescription();
+		dfadescJugador.addService(sdJugador);
+		IGoal ftJugador = createGoal("df_search");
+		ftJugador.getParameter("description").setValue(dfadescJugador);
+		AgentDescription[]	result1	= (AgentDescription[])ftJugador.getParameterSet("result").getValues();
+		AgentIdentifier jugador = result1[0].getName();
+					
 
 		Descartar_billetes db= new Descartar_billetes();
 		System.out.println("tablero le dice al jugador si quiere descartar billetes");
@@ -45,7 +55,7 @@ public class Descartar_billetes_plan extends Plan
 		sendMessage(msg3);
 
 		Billetes_descartados bd = new Billetes_descartados();
-		IMessageEvent	msg4	= createMessageEvent("informBilletesDescartados");
+		IMessageEvent	msg4	= createMessageEvent("informBilletesdTableroescartados");
 		msg4.setContent(bd);
 		msg4.getParameterSet(SFipa.RECEIVERS).addValue(jugador); //MIRAR CREENCIAS JUGADOR
 		sendMessage(msg4);

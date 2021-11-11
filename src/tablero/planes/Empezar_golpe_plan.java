@@ -2,7 +2,7 @@ package tablero.planes;
 
 import jadex.util.SUtil;
 import ontologia.acciones.*;
-import ontologia.predicados.Cartas_descartadas;
+import ontologia.predicados.*;
 import tablero.creencias.*;
 import jadex.runtime.IMessageEvent;
 import jadex.runtime.Plan;
@@ -22,26 +22,26 @@ public class Empezar_golpe_plan extends Plan
 		AgentIdentifier jugador= (AgentIdentifier) queryif.getParameter("sender").getValue();
 	
         Excusa_activada ea= new Excusa_activada();
-        excusa_activada = getBeliefbase().getBelief("excusa_activada").getFact();
+        ea = (Excusa_activada)getBeliefbase().getBelief("excusa_activada").getFact();
 
-		if (excusa_activada==false)
+		if (ea.equals(false))
 		{
-			msg = createMessageEvent("refuseExcusaActivada");
+			IMessageEvent msg = createMessageEvent("refuseExcusaActivada");
 			System.out.println("la ficha de excusa no esta activada");
             msg.setContent(ea);
 		    msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
 		    sendMessage(msg);
 		}
         else {
-            IMessageEvent	msg	= createMessageEvent("agreeExcusaActivada");
-            Empezar_golpe eg = new Empezar_golpe();
-            IMessageEvent	msg	= createMessageEvent("requestEmpezarGolpe");
-            msg.setContent(eg);
-            msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
-            sendMessage(msg);
-            msg.setContent(ea);
-		    msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
-		    sendMessage(msg);
+            IMessageEvent	msg1	= createMessageEvent("agreeExcusaActivada");
+            msg1.setContent(ea);
+            msg1.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+            sendMessage(msg1);
+            IMessageEvent	msg2	= createMessageEvent("requestEmpezarGolpe"); 
+            Empezar_golpe eg = new Empezar_golpe();         
+            msg2.setContent(eg);
+		    msg2.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+		    sendMessage(msg2);
         }
 	}
 }

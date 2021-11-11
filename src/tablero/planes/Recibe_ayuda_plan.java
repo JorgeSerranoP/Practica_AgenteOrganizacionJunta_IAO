@@ -2,7 +2,7 @@ package tablero.planes;
 
 import jadex.util.SUtil;
 import ontologia.acciones.*;
-import ontologia.predicados.Cartas_descartadas;
+import ontologia.predicados.*;
 import tablero.creencias.*;
 import jadex.runtime.IMessageEvent;
 import jadex.runtime.Plan;
@@ -18,50 +18,41 @@ public class Recibe_ayuda_plan extends Plan
 
     public void body()
     {
-		ServiceDescription sd = new ServiceDescription();
-		sd.setType("presidente");
-		AgentDescription dfadesc = new AgentDescription();
-		dfadesc.addService(sd);
-		IGoal ft = createGoal("df_search");
-		ft.getParameter("description").setValue(dfadesc);
-		AgentDescription[]	result	= (AgentDescription[])ft.getParameterSet("result").getValues();
-		AgentIdentifier presidente = result[0].getName();
-
-        ServiceDescription sd = new ServiceDescription();
-		sd.setType("tablero");
-		AgentDescription dfadesc = new AgentDescription();
-		dfadesc.addService(sd);
-		IGoal ft = createGoal("df_search");
-		ft.getParameter("description").setValue(dfadesc);
-		AgentDescription[]	result	= (AgentDescription[])ft.getParameterSet("result").getValues();
+		ServiceDescription sdTablero = new ServiceDescription();
+		sdTablero.setType("tablero");
+		AgentDescription dfadescTablero = new AgentDescription();
+		dfadescTablero.addService(sdTablero);
+		IGoal ftTablero = createGoal("df_search");
+		ftTablero.getParameter("description").setValue(dfadescTablero);
+		AgentDescription[]	result	= (AgentDescription[])ftTablero.getParameterSet("result").getValues();
 		AgentIdentifier tablero = result[0].getName();
 
-        ServiceDescription sd = new ServiceDescription();
-		sd.setType("jugador");
-		AgentDescription dfadesc = new AgentDescription();
-		dfadesc.addService(sd);
-		IGoal ft = createGoal("df_search");
-		ft.getParameter("description").setValue(dfadesc);
-		AgentDescription[]	result	= (AgentDescription[])ft.getParameterSet("result").getValues();
-		AgentIdentifier jugador = result[new Random().nextInt(result.length)].getName();
+		ServiceDescription sdJugador = new ServiceDescription();
+		sdJugador.setType("jugador");
+		AgentDescription dfadescJugador = new AgentDescription();
+		dfadescJugador.addService(sdJugador);
+		IGoal ftJugador = createGoal("df_search");
+		ftJugador.getParameter("description").setValue(dfadescJugador);
+		AgentDescription[]	result1	= (AgentDescription[])ftJugador.getParameterSet("result").getValues();
+		AgentIdentifier jugador = result1[0].getName();
 
 		Recibe_ayuda ra= new Recibe_ayuda();
 		System.out.println("tablero le dice al presidente si quiere recibir la ayuda extranjera");
-		IMessageEvent	msg	= createMessageEvent("requestRecibeAyuda");
-		msg.setContent(ra);
-		msg.getParameterSet(SFipa.RECEIVERS).addValue(presidente);
-		sendMessage(msg);
+		IMessageEvent	msg1	= createMessageEvent("requestRecibeAyuda");
+		msg1.setContent(ra);
+		msg1.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+		sendMessage(msg1);
 
 		System.out.println("el presidente acepta recibir la ayuda extranjera");
-		IMessageEvent	msg	= createMessageEvent("agreeRecibeAyuda");
-		msg.setContent(ra);
-		msg.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
-		sendMessage(msg);
+		IMessageEvent	msg2	= createMessageEvent("agreeRecibeAyuda");
+		msg2.setContent(ra);
+		msg2.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+		sendMessage(msg2);
 
         Ayuda_recibida ar = new Ayuda_recibida();
-		IMessageEvent	msg	= createMessageEvent("informAyudaRecibida");
-		msg.setContent(ar);
-		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
-		sendMessage(msg);
+		IMessageEvent	msg3	= createMessageEvent("informAyudaRecibida");
+		msg3.setContent(ar);
+		msg3.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+		sendMessage(msg3);
     }
 }

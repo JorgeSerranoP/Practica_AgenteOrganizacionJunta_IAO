@@ -24,7 +24,7 @@
 		<belief name = "localizaciones_jugador" class = "Localizaciones_jugador"/>
         <belief name = "marcador_fase" class = "String"/>
 		<belief name = "cartas_politicas_jugador" class = "Cartas_politicas_jugador"/>
-		<belief name = "tieneMasDe6Cartas" class = "TieneMasDe6Cartas"/>
+		<belief name = "tieneMasDe6Cartas" class = "TieneMasDe6CartasCreencia"/>
 		<belief name = "exiliado" class = "Exiliado"/>
 		<belief name = "excusa_activada" class = "boolean"/>
 		<belief name = "cargo_jugador" class = "Cargo_jugador"/>

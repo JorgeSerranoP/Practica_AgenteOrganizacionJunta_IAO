@@ -5,7 +5,6 @@ javac src\ontologia\conceptos\*java
 javac src\ontologia\acciones\*java
 javac src\ontologia\predicados\*java 
 javac src\tablero\creencias\*java
-pause
 javac src\tablero\planes\*java
 
 pause

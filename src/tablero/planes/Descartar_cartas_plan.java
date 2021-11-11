@@ -18,14 +18,23 @@ public class Descartar_cartas_plan extends Plan
 
     public void body()
     {
-		ServiceDescription sd = new ServiceDescription();
-		sd.setType("tablero");
-		AgentDescription dfadesc = new AgentDescription();
-		dfadesc.addService(sd);
-		IGoal ft = createGoal("df_search");
-		ft.getParameter("description").setValue(dfadesc);
-		AgentDescription[]	result	= (AgentDescription[])ft.getParameterSet("result").getValues();
+		ServiceDescription sdTablero = new ServiceDescription();
+		sdTablero.setType("tablero");
+		AgentDescription dfadescTablero = new AgentDescription();
+		dfadescTablero.addService(sdTablero);
+		IGoal ftTablero = createGoal("df_search");
+		ftTablero.getParameter("description").setValue(dfadescTablero);
+		AgentDescription[]	result	= (AgentDescription[])ftTablero.getParameterSet("result").getValues();
 		AgentIdentifier tablero = result[0].getName();
+
+		ServiceDescription sdJugador = new ServiceDescription();
+		sdJugador.setType("jugador");
+		AgentDescription dfadescJugador = new AgentDescription();
+		dfadescJugador.addService(sdJugador);
+		IGoal ftJugador = createGoal("df_search");
+		ftJugador.getParameter("description").setValue(dfadescJugador);
+		AgentDescription[]	result1	= (AgentDescription[])ftJugador.getParameterSet("result").getValues();
+		AgentIdentifier jugador = result1[0].getName();
 
 		TieneMasDe6Cartas tmdc= new TieneMasDe6Cartas();
 		System.out.println("tablero le pregunta al jugador si tiene mas de 6 cartas");
@@ -34,41 +43,44 @@ public class Descartar_cartas_plan extends Plan
 		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
 		sendMessage(msg);
 
-		NumeroCartas = getBeliefBase().getBelief("Cartas_politicas_jugador").getFact(cartas_politicas);
-		if (NumeroCartas > 6){
-			IMessageEvent	msg	= createMessageEvent("agreeTieneMasDe6Cartas");
-			msg.setContent(tmdc);
-			msg.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
-			sendMessage(msg);
+		Cartas_politicas_jugador cartas_politicas_jugador = new Cartas_politicas_jugador();
+		cartas_politicas_jugador = (Cartas_politicas_jugador) getBeliefbase().getBelief("cartas_politicas_jugador").getFact();
+		int numCartasJugador = cartas_politicas_jugador.getCartas();
+		
+		if (numCartasJugador > 6){
+			IMessageEvent msg1 = createMessageEvent("agreeTieneMasDe6Cartas");
+			msg1.setContent(tmdc);
+			msg1.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+			sendMessage(msg1);
 
 			Cartas_descartadas cd = new Cartas_descartadas();
-			IMessageEvent	msg	= createMessageEvent("informCartasDescartadas");
-			msg.setContent(cd);
-			msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador); //BUSCAR JUGADORES CREENCIAS
-			sendMessage(msg);
+			IMessageEvent	msg2	= createMessageEvent("informCartasDescartadas");
+			msg2.setContent(cd);
+			msg2.getParameterSet(SFipa.RECEIVERS).addValue(jugador); //BUSCAR JUGADORES CREENCIAS
+			sendMessage(msg2);
 		}
 
 		else {
-			IMessageEvent	msg	= createMessageEvent("refuseTieneMasDe6Cartas");
-			msg.setContent(tmdc);
-			msg.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
-			sendMessage(msg);
+			IMessageEvent	msg3	= createMessageEvent("refuseTieneMasDe6Cartas");
+			msg3.setContent(tmdc);
+			msg3.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+			sendMessage(msg3);
 
 			Descartar_cartas dc = new Descartar_cartas();
-			IMessageEvent	msg	= createMessageEvent("requestDescartarCartas");
-			msg.setContent(dc);
-			msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
-			sendMessage(msg);
+			IMessageEvent	msg4	= createMessageEvent("requestDescartarCartas");
+			msg4.setContent(dc);
+			msg4.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+			sendMessage(msg4);
 
-			IMessageEvent	msg	= createMessageEvent("agreeDescartarCartas");
-			msg.setContent(dc);
-			msg.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
-			sendMessage(msg);
+			IMessageEvent	msg5	= createMessageEvent("agreeDescartarCartas");
+			msg5.setContent(dc);
+			msg5.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+			sendMessage(msg5);
 			
-			IMessageEvent	msg	= createMessageEvent("refuseDescartarCartas");
-			msg.setContent(dc);
-			msg.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
-			sendMessage(msg);
+			IMessageEvent	msg6	= createMessageEvent("refuseDescartarCartas");
+			msg6.setContent(dc);
+			msg6.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+			sendMessage(msg6);
 		}
     }
 }
