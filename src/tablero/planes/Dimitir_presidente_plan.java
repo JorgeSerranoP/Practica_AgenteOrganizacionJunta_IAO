@@ -34,13 +34,16 @@ public class Dimitir_presidente_plan extends Plan
         IGoal ftJugador = createGoal("df_search");
         ftJugador.getParameter("description").setValue(dfadescJugador);
         AgentDescription[]    result1    = (AgentDescription[])ftJugador.getParameterSet("result").getValues();
-        
+        AgentIdentifier presidente = result1[0].getName();
+
+        /*
         for(int i = 0; i < result1.length; i++){    
             String cargo2= result1[i].getCargo();    
             if(cargo2.equals("presidente")){
                 AgentIdentifier presidente = result1[i].getName();
             }    
         }    
+        */
 
         Dimitir_presidente dp = new Dimitir_presidente();
         System.out.println("tablero le dice al presidente si quiere dimitir");
@@ -53,7 +56,7 @@ public class Dimitir_presidente_plan extends Plan
         IMessageEvent msg1 = createMessageEvent("informDimitido");
         msg1.setContent(pd);
         for(int i = 0; i < result1.length; i++){
-            msg5.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
+            msg1.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
         }
         sendMessage(msg1);
     }

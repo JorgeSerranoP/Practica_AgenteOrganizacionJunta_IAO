@@ -39,15 +39,19 @@ public class Recibe_ayuda_plan extends Plan
 		IGoal ftJugador = createGoal("df_search");
 		ftJugador.getParameter("description").setValue(dfadescJugador);
 		AgentDescription[]	result1	= (AgentDescription[])ftJugador.getParameterSet("result").getValues();
-		
+		AgentIdentifier presidente = result1[0].getName();
+
+		/*
 		for(int i = 0; i < result1.length; i++){	
-			String cargo2= result1[i].getCargo();	
+			String cargo2 = result1[i].getCargo();
 			if(cargo2.equals("presidente")){
 				AgentIdentifier presidente = result1[i].getName();
 			}	
 		}		
-		boolean hayPresidente = (hay_presidente)getBeliefbase().getBelief("hay_presidente").getFact();
-		String fase = (marcador_fase)getBeliefbase().getBelief("marcador_fase").getFact();
+		*/ 
+		
+		boolean hayPresidente = (boolean) getBeliefbase().getBelief("hay_presidente").getFact();
+		String fase = (String) getBeliefbase().getBelief("marcador_fase").getFact();
 		String faseAyudaExtranjera = "Fase_Ayuda_Extranjera";
 
 		IMessageEvent msg1 = createMessageEvent("queryIfFaseAyudaExtranjera");

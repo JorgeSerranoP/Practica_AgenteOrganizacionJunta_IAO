@@ -40,7 +40,7 @@ public class Empezar_golpe_plan extends Plan
 		AgentDescription[]	result1	= (AgentDescription[])ftJugador.getParameterSet("result").getValues();
 		AgentIdentifier jugador = result1[0].getName();
 	
-        boolean ea = (Excusa_activada)getBeliefbase().getBelief("excusa_activada").getFact();
+        boolean ea = (boolean) getBeliefbase().getBelief("excusa_activada").getFact();
 
         IMessageEvent msg1 = createMessageEvent("queryIfExcusaActivada");
 		System.out.println("tablero pregunta si la ficha de excusa esta activada");

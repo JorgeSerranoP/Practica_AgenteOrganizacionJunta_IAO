@@ -7,7 +7,7 @@ public class Golpe_empezado extends Predicado {
 	private Jugador jugador;
 	private Golpe golpe;
 	
-    public Empezar_golpe()
+    public Golpe_empezado()
     { ; }
 
 	public Jugador getJugador() {

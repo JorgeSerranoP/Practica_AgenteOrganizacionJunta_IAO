@@ -5,7 +5,7 @@ import ontologia.conceptos.*;
 public class Descartar_billetes extends Accion {
     
 	private Jugador jugador;
-	private Billetes billetes; 
+	private int billetes; 
 	
 	public Descartar_billetes()
     { ; }
@@ -18,11 +18,11 @@ public class Descartar_billetes extends Accion {
 		this.jugador = jugador;
 	}
 
-	public Billetes getBilletes() {
+	public int getBilletes() {
 		return billetes;
 	}
 
-	public void setBilletes(Billetes billetes) {
+	public void setBilletes(int billetes) {
 		this.billetes = billetes;
 	}
 	

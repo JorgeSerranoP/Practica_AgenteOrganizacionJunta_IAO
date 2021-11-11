@@ -37,14 +37,13 @@ public class Descartar_billetes_plan extends Plan
 		AgentIdentifier jugador = result1[0].getName();
 		
 		Descartar_billetes db= new Descartar_billetes();
-		db.setJugador(jugador);
 		System.out.println("tablero le dice al jugador si quiere descartar billetes");
 		IMessageEvent	msg1	= createMessageEvent("requestDescartarBilletes");
 		msg1.setContent(db);
 		msg1.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
 		
 		IMessageEvent requestResponse = sendMessageAndWait(msg1);
-		Descartar_billetes dbj = requestResponse.getContent();
+		Descartar_billetes dbj = (Descartar_billetes) requestResponse.getContent();
 
 		if(dbj.getBilletes() > 0){
 			IMessageEvent	msg2	= createMessageEvent("agreeDescartarBilletes");

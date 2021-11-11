@@ -1,8 +1,9 @@
 package ontologia.predicados;
 
 import ontologia.conceptos.*;
+import ontologia.predicados.Predicado;
 
-public class Fase_Ayuda_Extranjera extends Accion {
+public class Fase_Ayuda_Extranjera extends Predicado {
 	
 	private Cargo presidente;
 	private Billetes billete;
