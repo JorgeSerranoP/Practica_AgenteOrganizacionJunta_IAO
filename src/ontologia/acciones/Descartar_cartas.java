@@ -7,9 +7,18 @@ public class Descartar_cartas extends Accion {
 	private Jugador jugador;
 	private Cartas_politicas carta;
 	private boolean puedeDescartar;
+	private int numCartasDescartadas;
 	
     public Descartar_cartas()
     { ; }
+
+	public int getNumCartasDescartadas() {
+		return numCartasDescartadas;
+	}
+
+	public void setNumCartasDescartadas(int numCartasDescartadas) {
+		this.numCartasDescartadas = numCartasDescartadas;
+	}
 
 	public Cartas_politicas getCarta() {
 		return carta;

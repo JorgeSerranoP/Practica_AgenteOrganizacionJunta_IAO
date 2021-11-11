@@ -43,24 +43,29 @@ public class Descartar_cartas_plan extends Plan
 
 		TieneMasDe6CartasCreencia tmdc = (TieneMasDe6CartasCreencia)getBeliefbase().getBelief("tieneMasDe6Cartas").getFact();
 		boolean masDeSeis;
+		TieneMasDe6Cartas predtmdc = new TieneMasDe6Cartas();
 
-		for(int i = 0; i < result1.length; i++){
-			if(tmdc.getJugador().equals(jugador)){
-				masDeSeis = tmdc.getTieneMasDe6Cartas();
-			}
-		}
+		masDeSeis = tmdc.setJugador(jugador).getTieneMasDe6Cartas();
 
 		System.out.println("tablero le pregunta al jugador si tiene mas de 6 cartas");
 		IMessageEvent	msg	= createMessageEvent("queryTieneMasDe6Cartas");
-		msg.setContent(tmdc);
+		msg.setContent(predtmdc);
 		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
 		sendMessage(msg);
-		
+
+		Descartar_cartas dc = new Descartar_cartas();
+
 		if (masDeSeis){
 			IMessageEvent msg1 = createMessageEvent("agreeTieneMasDe6Cartas");
-			msg1.setContent(tmdc);
+			msg1.setContent(predtmdc);
 			msg1.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
 			sendMessage(msg1);
+
+			Cartas_politicas_jugador cartasJug = new Cartas_politicas_jugador();
+			cartasJug.setJugador(jugador);
+			cartasJug.setBilletes(cartasJug.getBilletes() - dc.getNumCartasDescartadas());
+			getBeliefbase().getBelief("cartas_politicas_jugador").setFact(cartasJug);
+			tmdc.setFact(false);
 
 			Cartas_descartadas cd = new Cartas_descartadas();
 			IMessageEvent	msg2	= createMessageEvent("informCartasDescartadas");
@@ -77,8 +82,6 @@ public class Descartar_cartas_plan extends Plan
 			msg3.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
 			sendMessage(msg3);
 
-			Descartar_cartas dc = new Descartar_cartas();
-			
 			IMessageEvent	msg4	= createMessageEvent("requestDescartarCartas");
 			msg4.setContent(dc);
 			msg4.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
@@ -97,14 +100,21 @@ public class Descartar_cartas_plan extends Plan
 			Quiere_descartar qd = (Quiere_descartar)getBeliefbase().getBelief("quiere_descartar").getFact();
 			boolean jugadorQuiereDescartar = qd.getQuiereDescartar();
 			
-			dc = msg5.getContent();
+			Descartar_cartas dcContent = new Descartar_cartas();
+			dcContent = msg5.getContent();
 
-			if(dc.getPuedeDescartar().equals(jugadorQuiereDescartar)){
+			if(dcContent.getPuedeDescartar().equals(jugadorQuiereDescartar)){
 				Cartas_descartadas cd1 = new Cartas_descartadas();
 				IMessageEvent msg6 = createMessageEvent("informCartasDescartadas");
 				msg6.setContent(cd1); 
 				for(int i = 0; i < result1.length; i++){
 					msg6.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
+
+				Cartas_politicas_jugador cartasJug = new Cartas_politicas_jugador();
+				cartasJug.setJugador(jugador);
+				cartasJug.setBilletes(cartasJug.getBilletes() - dc.getNumCartasDescartadas());
+				getBeliefbase().getBelief("cartas_politicas_jugador").setFact(cartasJug);
+				tmdc.setFact(false);
 			}
 			sendMessage(msg6);
 			}
