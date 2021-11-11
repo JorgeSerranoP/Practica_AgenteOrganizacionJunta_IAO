@@ -35,29 +35,45 @@ public class Descartar_billetes_plan extends Plan
 		ftJugador.getParameter("description").setValue(dfadescJugador);
 		AgentDescription[]	result1	= (AgentDescription[])ftJugador.getParameterSet("result").getValues();
 		AgentIdentifier jugador = result1[0].getName();
-					
-
+		
 		Descartar_billetes db= new Descartar_billetes();
+		db.setJugador(jugador);
 		System.out.println("tablero le dice al jugador si quiere descartar billetes");
 		IMessageEvent	msg1	= createMessageEvent("requestDescartarBilletes");
 		msg1.setContent(db);
 		msg1.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
-		sendMessage(msg1);
+		
+		IMessageEvent requestResponse = sendMessageAndWait(msg1);
+		Descartar_billetes dbj = requestResponse.getContent();
 
-		IMessageEvent	msg2	= createMessageEvent("agreeDescartarBilletes");
-		msg2.setContent(db);
-		msg2.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
-		sendMessage(msg2);
+		if(dbj.getBilletes() > 0){
+			IMessageEvent	msg2	= createMessageEvent("agreeDescartarBilletes");
+			msg2.setContent(dbj);
+			msg2.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+			sendMessage(msg2);
 
-		IMessageEvent	msg3	= createMessageEvent("refuseDescartarBilletes");
-		msg3.setContent(db);
-		msg3.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
-		sendMessage(msg3);
+			Billetes_jugador bj = new Billetes_jugador();
+			bj.setJugador(jugador);
+			bj.setBilletes(bj.getBilletes() - dbj.getBilletes());
+			getBeliefbase().getBelief("billetes_jugador").setFact(bj);
+			System.out.println("el jugador ha descartado billetes");
 
-		Billetes_descartados bd = new Billetes_descartados();
-		IMessageEvent	msg4	= createMessageEvent("informBilletesdTableroescartados");
-		msg4.setContent(bd);
-		msg4.getParameterSet(SFipa.RECEIVERS).addValue(jugador); //MIRAR CREENCIAS JUGADOR
-		sendMessage(msg4);
+			Billetes_descartados bd = new Billetes_descartados();
+			IMessageEvent	msg3	= createMessageEvent("informBilletesDescartados");
+			msg3.setContent(bd);
+			for(int i = 0; i < result1.length; i++){
+				msg3.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
+			}
+			sendMessage(msg3);
+			
+		} else{
+			IMessageEvent	msg4	= createMessageEvent("refuseDescartarBilletes");
+			msg4.setContent(db);
+			msg4.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+			sendMessage(msg4);
+			System.out.println("el jugador ha descartado billetes");
+		}
+
+		
     }
 }
