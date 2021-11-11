@@ -1,7 +1,7 @@
 //Hecho por Iván Aguado Perulero
 //NIA: 100405871
-//Al no haber programado todavía el agente jugador, he simulado que los mensajes se enviaban al tablero desde este propio plan
-//con el fin de hacerlo más entendible y coherente.
+/*Al no haber programado todavía el agente jugador, he simulado que los mensajes se enviaban al tablero desde este propio plan
+con el fin de hacerlo más entendible y coherente.*/
 
 package tablero.planes;
 
@@ -78,6 +78,7 @@ public class Descartar_cartas_plan extends Plan
 			sendMessage(msg3);
 
 			Descartar_cartas dc = new Descartar_cartas();
+			
 			IMessageEvent	msg4	= createMessageEvent("requestDescartarCartas");
 			msg4.setContent(dc);
 			msg4.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
@@ -98,12 +99,12 @@ public class Descartar_cartas_plan extends Plan
 			
 			dc = msg5.getContent();
 
-			if(dc.getQuiereDescartar().equals(jugadorQuiereDescartar)){
+			if(dc.getPuedeDescartar().equals(jugadorQuiereDescartar)){
 				Cartas_descartadas cd1 = new Cartas_descartadas();
 				IMessageEvent msg6 = createMessageEvent("informCartasDescartadas");
 				msg6.setContent(cd1); 
 				for(int i = 0; i < result1.length; i++){
-				msg6.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
+					msg6.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
 			}
 			sendMessage(msg6);
 			}
