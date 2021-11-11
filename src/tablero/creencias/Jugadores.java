@@ -4,7 +4,8 @@ public class Jugadores
 {
     
     protected String nombre;
-	
+	protected String cargo;
+
 	public Jugadores() {}
 	
 	public String getNombre()
@@ -16,4 +17,11 @@ public class Jugadores
 		this.nombre=nombre;
 	}
 
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
 }
