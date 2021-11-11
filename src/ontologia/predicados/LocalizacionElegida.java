@@ -1,8 +1,7 @@
-package src.ontologia.predicados;
+package ontologia.predicados;
 
-import src.ontologia.Predicado;
-import src.ontologia.conceptos.Jugador;
-import src.ontologia.conceptos.Localizacion;
+import ontologia.conceptos.Jugador;
+import ontologia.conceptos.Localizacion;
 
 public class LocalizacionElegida  extends Predicado {
     

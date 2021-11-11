@@ -1,8 +1,7 @@
-package src.ontologia.acciones;
+package ontologia.acciones;
 
-import src.ontologia.Accion;
-import src.ontologia.conceptos.Cargo;
-import src.ontologia.conceptos.Jugador;
+import ontologia.conceptos.Cargo;
+import ontologia.conceptos.Jugador;
 
 public class Asigna_cargo extends Accion {
 	private Jugador jugador;

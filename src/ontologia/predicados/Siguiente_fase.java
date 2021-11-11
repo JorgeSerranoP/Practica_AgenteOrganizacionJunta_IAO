@@ -1,6 +1,4 @@
-package src.ontologia.predicados;
-
-import src.ontologia.Predicado;
+package ontologia.predicados;
 
 public class Siguiente_fase extends Predicado{
 	

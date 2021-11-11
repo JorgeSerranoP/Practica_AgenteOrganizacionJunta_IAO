@@ -1,9 +1,9 @@
-package src.tablero.planes;
+package tablero.planes;
 
 import jadex.util.SUtil;
-import src.ontologia.acciones.*;
-import src.ontologia.predicados.Cartas_descartadas;
-import src.tablero.creencias.*;
+import ontologia.acciones.*;
+import ontologia.predicados.*;
+import tablero.creencias.*;
 import jadex.runtime.IMessageEvent;
 import jadex.runtime.Plan;
 import jadex.runtime.IGoal;

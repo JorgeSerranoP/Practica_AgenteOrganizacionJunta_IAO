@@ -1,21 +1,19 @@
-package src.ontologia.conceptos;
-
-import src.ontologia.Concepto;
+package ontologia.conceptos;
 
 public class Ficha_control extends Concepto {
 	
-	private Cargo cuñado;
+	private Cargo cunado;
 	private Cargo cargo;
 	
 	public Ficha_control()
 	{ ; }
 
-	public Cargo getCuñado() {
-		return cuñado;
+	public Cargo getCunado() {
+		return cunado;
 	}
 
-	public void setCuñado(Cargo cuñado) {
-		this.cuñado = cuñado;
+	public void setCunado(Cargo cunado) {
+		this.cunado = cunado;
 	}
 
 	public Cargo getCargo() {

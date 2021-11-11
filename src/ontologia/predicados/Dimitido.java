@@ -1,8 +1,7 @@
-package src.ontologia.predicados;
+package ontologia.predicados;
 
-import src.ontologia.Predicado;
-import src.ontologia.conceptos.Cargo;
-import src.ontologia.conceptos.Jugador;
+import ontologia.conceptos.Cargo;
+import ontologia.conceptos.Jugador;
 
 public class Dimitido extends Predicado {
     

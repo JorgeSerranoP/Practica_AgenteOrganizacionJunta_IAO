@@ -1,4 +1,4 @@
-package src.tablero.creencias;
+package tablero.creencias;
 
 import jadex.adapter.fipa.AgentIdentifier;
 
@@ -13,11 +13,11 @@ public class Localizaciones_jugadores
 	{
 		return jugador;
 	}
-	public int getLocalizacion()
+	public String getLocalizacion()
 	{
 		return localizacion;
 	}
-	public void setLocalizacion(int b)
+	public void setLocalizacion(String b)
 	{
 		this.localizacion=b;
 	}

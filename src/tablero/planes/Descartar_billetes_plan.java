@@ -1,9 +1,9 @@
-package src.tablero.planes;
+package tablero.planes;
 
 import jadex.util.SUtil;
-import src.ontologia.acciones.*;
-import src.ontologia.predicados.Cartas_descartadas;
-import src.tablero.creencias.*;
+import ontologia.acciones.*;
+import ontologia.predicados.*;
+import tablero.creencias.*;
 import jadex.runtime.IMessageEvent;
 import jadex.runtime.Plan;
 import jadex.runtime.IGoal;
@@ -29,25 +29,25 @@ public class Descartar_billetes_plan extends Plan
 
 		Descartar_billetes db= new Descartar_billetes();
 		System.out.println("tablero le dice al jugador si quiere descartar billetes");
-		IMessageEvent	msg	= createMessageEvent("requestDescartarBilletes");
-		msg.setContent(db);
-		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
-		sendMessage(msg);
+		IMessageEvent	msg1	= createMessageEvent("requestDescartarBilletes");
+		msg1.setContent(db);
+		msg1.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
+		sendMessage(msg1);
 
-		IMessageEvent	msg	= createMessageEvent("agreeDescartarBilletes");
-		msg.setContent(db);
-		msg.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
-		sendMessage(msg);
+		IMessageEvent	msg2	= createMessageEvent("agreeDescartarBilletes");
+		msg2.setContent(db);
+		msg2.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+		sendMessage(msg2);
 
-		IMessageEvent	msg	= createMessageEvent("refuseDescartarBilletes");
-		msg.setContent(db);
-		msg.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
-		sendMessage(msg);
+		IMessageEvent	msg3	= createMessageEvent("refuseDescartarBilletes");
+		msg3.setContent(db);
+		msg3.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+		sendMessage(msg3);
 
 		Billetes_descartados bd = new Billetes_descartados();
-		IMessageEvent	msg	= createMessageEvent("informBilletesDescartados");
-		msg.setContent(bd);
-		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador); //MIRAR CREENCIAS JUGADOR
-		sendMessage(msg);
+		IMessageEvent	msg4	= createMessageEvent("informBilletesDescartados");
+		msg4.setContent(bd);
+		msg4.getParameterSet(SFipa.RECEIVERS).addValue(jugador); //MIRAR CREENCIAS JUGADOR
+		sendMessage(msg4);
     }
 }

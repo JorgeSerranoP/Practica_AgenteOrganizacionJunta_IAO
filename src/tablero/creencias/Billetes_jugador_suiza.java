@@ -1,19 +1,19 @@
-package src.tablero.creencias;
+package tablero.creencias;
 
 import jadex.adapter.fipa.AgentIdentifier;
 
-public class Billetes_jugador
+public class Billetes_jugador_suiza
 {
     protected AgentIdentifier jugador;
 	protected int billetes;
 	
-	public Billetes_jugador() {}
+	public Billetes_jugador_suiza() {}
 	
 	public AgentIdentifier getJugador()
 	{
 		return jugador;
 	}
-	public String getBilletes()
+	public int getBilletes()
 	{
 		return billetes;
 	}

@@ -1,4 +1,4 @@
-package src.tablero.creencias;
+package tablero.creencias;
 
 import jadex.adapter.fipa.AgentIdentifier;
 
@@ -13,7 +13,7 @@ public class Billetes_jugador
 	{
 		return jugador;
 	}
-	public String getBilletes()
+	public int getBilletes()
 	{
 		return billetes;
 	}

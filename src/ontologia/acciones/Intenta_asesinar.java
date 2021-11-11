@@ -1,7 +1,6 @@
-package src.ontologia.acciones;
+package ontologia.acciones;
 
-import src.ontologia.Accion;
-import src.ontologia.conceptos.*;
+import ontologia.conceptos.*;
 
 public class Intenta_asesinar extends Accion {
 	

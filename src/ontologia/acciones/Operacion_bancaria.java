@@ -1,9 +1,8 @@
-package src.ontologia.acciones;
+package ontologia.acciones;
 
-import src.ontologia.Accion;
-import src.ontologia.conceptos.Billetes;
-import src.ontologia.conceptos.Jugador;
-import src.ontologia.conceptos.Localizacion;
+import ontologia.conceptos.Billetes;
+import ontologia.conceptos.Jugador;
+import ontologia.conceptos.Localizacion;
 
 public class Operacion_bancaria extends Accion{
 

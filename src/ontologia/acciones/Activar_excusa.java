@@ -1,8 +1,7 @@
-package src.ontologia.acciones;
+package ontologia.acciones;
 
-import src.ontologia.Accion;
-import src.ontologia.conceptos.Ficha_excusa;
-import src.ontologia.conceptos.Jugador;
+import ontologia.conceptos.Ficha_excusa;
+import ontologia.conceptos.Jugador;
 
 public class Activar_excusa extends Accion {
 	

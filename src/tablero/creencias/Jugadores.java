@@ -1,6 +1,4 @@
-package src.tablero.creencias;
-
-import jadex.adapter.fipa.AgentIdentifier;
+package tablero.creencias;
 
 public class Jugadores
 {

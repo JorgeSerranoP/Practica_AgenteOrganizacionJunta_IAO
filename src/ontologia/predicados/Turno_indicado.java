@@ -1,7 +1,6 @@
-package src.ontologia.predicados;
+package ontologia.predicados;
 
-import src.ontologia.Predicado;
-import src.ontologia.conceptos.*;
+import ontologia.conceptos.*;
 
 public class Turno_indicado extends Predicado {
     

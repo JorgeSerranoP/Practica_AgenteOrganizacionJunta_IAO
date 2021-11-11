@@ -1,4 +1,4 @@
-package src.tablero.creencias;
+package tablero.creencias;
 
 import jadex.adapter.fipa.AgentIdentifier;
 
@@ -25,3 +25,4 @@ public class Num_cargos_asignados
 	{
 		this.jugador=h;
 	}
+}

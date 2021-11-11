@@ -1,6 +1,4 @@
-package src.ontologia.acciones;
-
-import src.ontologia.Accion;
+package ontologia.acciones;
 
 public class Empezar_partida extends Accion{
     private int jugadores;

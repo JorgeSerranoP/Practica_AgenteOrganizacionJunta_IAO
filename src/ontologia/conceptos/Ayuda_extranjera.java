@@ -1,6 +1,4 @@
-package src.ontologia.conceptos;
-
-import src.ontologia.Concepto;
+package ontologia.conceptos;
 
 public class Ayuda_extranjera extends Concepto {
 	

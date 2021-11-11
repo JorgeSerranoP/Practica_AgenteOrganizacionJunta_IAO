@@ -1,5 +1,4 @@
-package src.ontologia;
-
+package ontologia.acciones;
 
 public class Accion {
     

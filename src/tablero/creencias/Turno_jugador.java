@@ -1,10 +1,8 @@
-package src.tablero.creencias;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
+package tablero.creencias;
 
 import jadex.adapter.fipa.AgentIdentifier;
 
-public class TieneMasDe6Cartas
+public class Turno_jugador
 {
     protected AgentIdentifier jugador;
 	protected Boolean turno_jugador;

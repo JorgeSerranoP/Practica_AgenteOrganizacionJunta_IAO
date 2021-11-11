@@ -1,4 +1,4 @@
-package src.ontologia;
+package ontologia.predicados;
 
 
 public class Predicado {
