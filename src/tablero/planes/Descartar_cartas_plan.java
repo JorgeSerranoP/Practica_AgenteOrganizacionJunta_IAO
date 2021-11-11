@@ -1,3 +1,8 @@
+//Hecho por Iván Aguado Perulero
+//NIA: 100405871
+//Al no haber programado todavía el agente jugador, he simulado que los mensajes se enviaban al tablero desde este propio plan
+//con el fin de hacerlo más entendible y coherente.
+
 package tablero.planes;
 
 import jadex.util.SUtil;
@@ -36,18 +41,22 @@ public class Descartar_cartas_plan extends Plan
 		AgentDescription[]	result1	= (AgentDescription[])ftJugador.getParameterSet("result").getValues();
 		AgentIdentifier jugador = result1[0].getName();
 
-		TieneMasDe6Cartas tmdc= new TieneMasDe6Cartas();
+		TieneMasDe6CartasCreencia tmdc = (TieneMasDe6CartasCreencia)getBeliefbase().getBelief("tieneMasDe6Cartas").getFact();
+		boolean masDeSeis;
+
+		for(int i = 0; i < result1.length; i++){
+			if(tmdc.getJugador().equals(jugador)){
+				masDeSeis = tmdc.getTieneMasDe6Cartas();
+			}
+		}
+
 		System.out.println("tablero le pregunta al jugador si tiene mas de 6 cartas");
 		IMessageEvent	msg	= createMessageEvent("queryTieneMasDe6Cartas");
 		msg.setContent(tmdc);
 		msg.getParameterSet(SFipa.RECEIVERS).addValue(jugador);
 		sendMessage(msg);
-
-		Cartas_politicas_jugador cartas_politicas_jugador = new Cartas_politicas_jugador();
-		cartas_politicas_jugador = (Cartas_politicas_jugador) getBeliefbase().getBelief("cartas_politicas_jugador").getFact();
-		int numCartasJugador = cartas_politicas_jugador.getCartas();
 		
-		if (numCartasJugador > 6){
+		if (masDeSeis){
 			IMessageEvent msg1 = createMessageEvent("agreeTieneMasDe6Cartas");
 			msg1.setContent(tmdc);
 			msg1.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
@@ -55,8 +64,10 @@ public class Descartar_cartas_plan extends Plan
 
 			Cartas_descartadas cd = new Cartas_descartadas();
 			IMessageEvent	msg2	= createMessageEvent("informCartasDescartadas");
-			msg2.setContent(cd);
-			msg2.getParameterSet(SFipa.RECEIVERS).addValue(jugador); //BUSCAR JUGADORES CREENCIAS
+			msg2.setContent(cd); 
+			for(int i = 0; i < result1.length; i++){
+				msg2.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
+			}
 			sendMessage(msg2);
 		}
 
@@ -76,11 +87,27 @@ public class Descartar_cartas_plan extends Plan
 			msg5.setContent(dc);
 			msg5.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
 			sendMessage(msg5);
-			
+
 			IMessageEvent	msg6	= createMessageEvent("refuseDescartarCartas");
 			msg6.setContent(dc);
 			msg6.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
 			sendMessage(msg6);
+
+			Quiere_descartar qd = (Quiere_descartar)getBeliefbase().getBelief("quiere_descartar").getFact();
+			boolean jugadorQuiereDescartar = qd.getQuiereDescartar();
+			
+			dc = msg5.getContent();
+
+			if(dc.getQuiereDescartar().equals(jugadorQuiereDescartar)){
+				Cartas_descartadas cd1 = new Cartas_descartadas();
+				IMessageEvent msg6 = createMessageEvent("informCartasDescartadas");
+				msg6.setContent(cd1); 
+				for(int i = 0; i < result1.length; i++){
+				msg6.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
+			}
+			sendMessage(msg6);
+			}
+			
 		}
     }
 }

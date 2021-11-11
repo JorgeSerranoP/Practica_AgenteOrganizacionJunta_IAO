@@ -37,6 +37,7 @@
 		<belief name = "numero_jugadores" class = "int"/>
 		<belief name = "numero_jugadores_turno_jugado" class = "int"/>
         <belief name = "num_cargos_asignados" class = "Num_cargos_asignados"/>
+        <belief name = "quiere_descartar" class = "Quiere_descartar"/>
 	</beliefs>
 
 	<goals>

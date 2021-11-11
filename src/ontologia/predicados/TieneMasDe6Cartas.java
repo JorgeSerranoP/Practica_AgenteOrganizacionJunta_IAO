@@ -4,18 +4,18 @@ import ontologia.conceptos.*;
 
 public class TieneMasDe6Cartas extends Predicado{
 
-    private Cartas_politicas cartas;
+    private boolean tieneMasDe6cartas;
 	private Jugador jugador;
 	
 	public TieneMasDe6Cartas()
 	{ ; }
 
-	public Cartas_politicas getCartas() {
-		return cartas;
+	public boolean getTieneMasDe6cartas() {
+		return tieneMasDe6cartas;
 	}
 
-	public void setCartas(Cartas_politicas cartas) {
-		this.cartas = cartas;
+	public void setTieneMasDe6cartas(boolean tieneMasDe6cartas) {
+		this.tieneMasDe6cartas = tieneMasDe6cartas;
 	}
 
 	public Jugador getJugador() {
