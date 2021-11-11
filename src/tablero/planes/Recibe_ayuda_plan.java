@@ -64,22 +64,28 @@ public class Recibe_ayuda_plan extends Plan
 			msg2.getParameterSet(SFipa.RECEIVERS).addValue(presidente);
 			sendMessage(msg2);
 
+			IMessageEvent	msg3	= createMessageEvent("requestEmpezarGolpe"); 
+            Recibe_ayuda ayuda = new Recibe_ayuda();         
+            msg3.setContent(ayuda);
+		    msg3.getParameterSet(SFipa.RECEIVERS).addValue(tablero);
+		    sendMessage(msg3);
+
 			Ayuda_recibida ar = new Ayuda_recibida();
-			IMessageEvent	msg3	= createMessageEvent("informAyudaRecibida");
-			msg3.setContent(ar);
+			IMessageEvent	msg4	= createMessageEvent("informAyudaRecibida");
+			msg4.setContent(ar);
 
 			for(int i = 0; i < result1.length; i++){
-				msg3.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
+				msg4.getParameterSet(SFipa.RECEIVERS).addValue(result1[i].getName());
 			}
-			sendMessage(msg3);
+			sendMessage(msg4);
 		}
 		else {
 
 			System.out.println("el presidente rechaza recibir la ayuda extranjera");
-			IMessageEvent	msg4	= createMessageEvent("refuseRecibeAyuda");
-			msg4.setContent(fase);
-			msg4.getParameterSet(SFipa.RECEIVERS).addValue(presidente);
-			sendMessage(msg4);
+			IMessageEvent	msg5	= createMessageEvent("refuseRecibeAyuda");
+			msg5.setContent(fase);
+			msg5.getParameterSet(SFipa.RECEIVERS).addValue(presidente);
+			sendMessage(msg5);
 
 		}    
     }
